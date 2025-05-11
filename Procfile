@@ -1,2 +1,2 @@
-web: gunicorn chat_project.wsgi --log-file -
+web: daphne chat_project.asgi:application
 worker: daphne chat_project.asgi:application
