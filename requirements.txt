@@ -1,0 +1,5 @@
+Django
+channels
+daphne
+gunicorn
+channels_redis  # if you're using Redis
