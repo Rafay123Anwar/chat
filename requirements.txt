@@ -3,3 +3,4 @@ channels
 daphne
 gunicorn
 channels_redis  # if you're using Redis
+psycopg2-binary>=2.9
