@@ -1,7 +1,7 @@
-Django
-channels
-daphne
-gunicorn
-channels_redis  # if you're using Redis
+Django>=5.2.1
+channels>=4.2.2
+daphne>=4.1.2
+gunicorn>=23.0.0
+channels_redis>=4.2.1
 psycopg2-binary>=2.9
-redis
+redis>=6.0.0
