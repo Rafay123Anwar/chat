@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        form {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #3498db;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .room-list {
+            list-style: none;
+            padding: 0;
+        }
+        .room-list li {
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .room-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .room-list a {
+            display: block;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+        }
+        .room-list a:hover {
+            color: #2980b9;
+        }
+        .room-time {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .no-rooms {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chat Rooms</h1>
+        
+        <form id="roomForm">
+            <input type="text" id="room-name-input" placeholder="Enter a room name" required>
+            <button type="submit">Join Room</button>
+        </form>
+        
+        <h2>Available Rooms</h2>
+        {% if rooms %}
+            <ul class="room-list">
+                {% for room in rooms %}
+                    <li>
+                        <a href="/{{ room.name }}/">{{ room.name }}</a>
+                        <div class="room-time">Created: {{ room.created_at|date:"F j, Y, g:i a" }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-rooms">No rooms available. Create one to get started!</p>
+        {% endif %}
+
+        <div class="footer">
+            <p>&copy; 2025 Chat Application</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#roomForm').onsubmit = function(e) {
+            e.preventDefault();
+            let roomName = document.querySelector('#room-name-input').value;
+            if (roomName) {
+                window.location.pathname = '/' + roomName + '/';
+            }
+        };
+    </script>
+</body>
+</html>
